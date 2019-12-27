@@ -5,46 +5,86 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    
+    [SerializeField] private TextMeshProUGUI[] text = new TextMeshProUGUI[3];
+    /*
+        [TEXT]
+        1 = Start
+        2 = Reset
+        3 = Pause
+    */
 
-    [SerializeField] private TextMeshProUGUI startText = null;
     [SerializeField] private AudioClip[] audioClips = null;
+    /*
+        [SFX]
+        1 = Hit
+        2 = Score
+        3 = Reset
+    */
+
+    [SerializeField] private BallController ball = null;
 
     private AudioSource _audioSource;
+    private bool _paused = false;
 
 
     private void Awake() 
     {
         _audioSource = GetComponent<AudioSource>();
+    }
 
-        startText.gameObject.SetActive(true);
+    private void Start() 
+    {
+        for (int i = 0; i < text.Length; i++)
+        {
+            text[i].gameObject.SetActive(true);
+        }   
     }
 
     private void Update() 
     {
         if (Input.GetKeyUp(KeyCode.Space))
-            DeactivateStartText();
+            DisplayText(false);
+
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            _paused = !_paused;
+            PauseGame(_paused);
+        }
+
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            ResetGame();
+            PlaySound(2);
+        }
     }
 
-    public void DeactivateStartText()
+    public void ResetGame()
     {
-        startText.gameObject.SetActive(false);
+        DisplayText(true);
+        ball.ResetBallPosition();
     }
 
-    public void ActivateStartText()
+    public void DisplayText( bool activation )
     {
-        startText.gameObject.SetActive(true);
+        for (int i = 0; i < text.Length; i++)
+        {
+            text[i].gameObject.SetActive(activation);
+        }
     }
 
-    public void PlayHitSound()
+    public void PlaySound( int sound )
     {
-        _audioSource.clip = audioClips[0];
+        _audioSource.clip = audioClips[sound];
         _audioSource.Play();
     }
 
-    public void PlayScoreSound()
+    private void PauseGame( bool pause )
     {
-        _audioSource.clip = audioClips[1];
-        _audioSource.Play();
+        if (pause)
+            Time.timeScale = 0;
+        else if (!pause)
+            Time.timeScale = 1;
     }
 
 }
