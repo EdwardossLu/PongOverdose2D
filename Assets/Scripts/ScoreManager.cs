@@ -8,9 +8,9 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreUI = null;
     [SerializeField] private GameManager manager = null;
-    [SerializeField] private BallController ballController = null;
 
     private int score;
+
 
     private void Awake() 
     {
@@ -26,12 +26,16 @@ public class ScoreManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ball"))
         {
-            ++score;
-            scoreUI.text = score.ToString();
-
-            ballController.ResetBallPosition();
-            manager.ActivateStartText();
+            PointScored();
         }
+    }
+
+    private void PointScored()
+    {
+        ++score;
+        scoreUI.text = score.ToString();
+
+        manager.ResetGame();
     }
 
 }

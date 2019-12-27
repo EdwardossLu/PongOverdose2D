@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private EnemyController enemy = null;
-    //[SerializeField] private GameManager manager = null;
 
 
     private void Update() 
@@ -21,7 +20,7 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector2.up * moveVert);
 
         Vector2 clamPos = transform.position;
-        clamPos.y = Mathf.Clamp(clamPos.y, -4.3f, 4.3f);
+        clamPos.y = Mathf.Clamp(clamPos.y, -3.9f, 3.9f);
         transform.position = clamPos;
     }
 

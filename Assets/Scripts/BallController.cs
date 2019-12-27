@@ -30,7 +30,7 @@ public class BallController : MonoBehaviour
         {
             int randDirection = Random.Range(1, 4);
             MoveAngle(randDirection);
-            manager.PlayHitSound();
+            manager.PlaySound(0);
             _gameStatus = true;
         }
     }
@@ -45,15 +45,14 @@ public class BallController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) 
     {
         if (other.gameObject.CompareTag("Finish"))
-            manager.PlayScoreSound();
+            manager.PlaySound(1);
         else
-            manager.PlayHitSound();
+            manager.PlaySound(0);
     }
 
     private void MoveAngle( int value)
     {
-
-        //TODO: Use Random.Range instead of this.
+        //TODO: Use Random.Range instead of this. 
         switch(value)
         {
             case 1:
