@@ -9,17 +9,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] text = new TextMeshProUGUI[3];
     /*
         [TEXT]
-        1 = Start
-        2 = Reset
-        3 = Pause
+        0 = Start
+        1 = Reset
+        2 = Pause
     */
 
     [SerializeField] private AudioClip[] audioClips = null;
     /*
         [SFX]
-        1 = Hit
-        2 = Score
-        3 = Reset
+        0 = Hit
+        1 = Score
+        2 = Reset
     */
 
     [SerializeField] private BallController ball = null;
