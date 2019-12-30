@@ -6,21 +6,17 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     
-    [SerializeField] private TextMeshProUGUI[] text = new TextMeshProUGUI[3];
-    /*
+    [SerializeField] private TextMeshProUGUI[] text = new TextMeshProUGUI[3]; /*
         [TEXT]
         0 = Start
         1 = Reset
-        2 = Pause
-    */
+        2 = Pause */
 
-    [SerializeField] private AudioClip[] audioClips = null;
-    /*
+    [SerializeField] private AudioClip[] audioClips = null; /*
         [SFX]
         0 = Hit
         1 = Score
-        2 = Reset
-    */
+        2 = Reset */
 
     [SerializeField] private BallController ball = null;
 
