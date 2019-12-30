@@ -17,12 +17,14 @@ public class EnemyController : MonoBehaviour
 
     private void SetMovement()
     {
-        Vector2 clamPos = transform.position;
+        Vector3 position = transform.position;
+        Vector2 clamPos = position;
 
-        clamPos.y = Mathf.Lerp(transform.position.y, ball.position.y, _randomDistance);
+        clamPos.y = Mathf.Lerp(position.y, ball.position.y, _randomDistance);
         clamPos.y = Mathf.Clamp(clamPos.y, -3.9f, 3.9f);
 
-        transform.position = clamPos;                   
+        position = clamPos;
+        transform.position = position;
     }
 
     // Change the speed everytime the player hits the ball.

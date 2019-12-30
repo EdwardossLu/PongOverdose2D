@@ -9,12 +9,12 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreUI = null;
     [SerializeField] private GameManager manager = null;
 
-    private int score;
+    private int _score;
 
 
     private void Awake() 
     {
-        if (score != 0) score = 0;
+        if (_score != 0) _score = 0;
     }
 
     private void Start() 
@@ -32,8 +32,8 @@ public class ScoreManager : MonoBehaviour
 
     private void PointScored()
     {
-        ++score;
-        scoreUI.text = score.ToString();
+        ++_score;
+        scoreUI.text = _score.ToString();
 
         manager.ResetGame();
     }

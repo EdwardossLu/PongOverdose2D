@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour
     private void Movement() 
     {
         float moveVert = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        transform.Translate(Vector2.up * moveVert);
+        Transform transform1;
+        (transform1 = transform).Translate(Vector2.up * moveVert);
 
-        Vector2 clamPos = transform.position;
+        Vector2 clamPos = transform1.position;
         clamPos.y = Mathf.Clamp(clamPos.y, -3.9f, 3.9f);
         transform.position = clamPos;
     }

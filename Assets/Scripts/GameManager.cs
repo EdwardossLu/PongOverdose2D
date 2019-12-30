@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -29,12 +30,12 @@ public class GameManager : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    private void Start() 
+    private void Start()
     {
-        for (int i = 0; i < text.Length; i++)
+        foreach (TextMeshProUGUI tmp in text)
         {
-            text[i].gameObject.SetActive(true);
-        }   
+            tmp.gameObject.SetActive(true);
+        }
     }
 
     private void Update() 
@@ -48,11 +49,9 @@ public class GameManager : MonoBehaviour
             PauseGame(_paused);
         }
 
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            ResetGame();
-            PlaySound(2);
-        }
+        if (!Input.GetKeyUp(KeyCode.R)) return;
+        ResetGame();
+        PlaySound(2);
     }
 
     public void ResetGame()
@@ -61,11 +60,11 @@ public class GameManager : MonoBehaviour
         ball.ResetBallPosition();
     }
 
-    public void DisplayText( bool activation )
+    private void DisplayText( bool activation )
     {
-        for (int i = 0; i < text.Length; i++)
+        foreach (TextMeshProUGUI tmp in text)
         {
-            text[i].gameObject.SetActive(activation);
+            tmp.gameObject.SetActive(activation);
         }
     }
 
@@ -75,12 +74,9 @@ public class GameManager : MonoBehaviour
         _audioSource.Play();
     }
 
-    private void PauseGame( bool pause )
+    private static void PauseGame( bool pause )
     {
-        if (pause)
-            Time.timeScale = 0;
-        else if (!pause)
-            Time.timeScale = 1;
+        Time.timeScale = pause ? 0 : 1;
     }
 
 }

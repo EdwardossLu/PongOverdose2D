@@ -42,12 +42,9 @@ public class BallController : MonoBehaviour
         _gameStatus = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D other) 
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Finish"))
-            manager.PlaySound(1);
-        else
-            manager.PlaySound(0);
+        manager.PlaySound(other.gameObject.CompareTag("Finish") ? 1 : 0);
     }
 
     private void MoveAngle( int value)
