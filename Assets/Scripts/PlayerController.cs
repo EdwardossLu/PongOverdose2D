@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     [SerializeField] private float speed = 5f;
     [SerializeField] private EnemyController enemy = null;
 
@@ -14,6 +13,7 @@ public class PlayerController : MonoBehaviour
         Movement();
     }
 
+    // Move the character based on the players input.
     private void Movement() 
     {
         float moveVert = Input.GetAxis("Vertical") * speed * Time.deltaTime;
@@ -25,9 +25,9 @@ public class PlayerController : MonoBehaviour
         transform.position = clamPos;
     }
 
+    // Check the movement speed of the enemy each time the player hits the ball.
     private void OnCollisionEnter2D(Collision2D other) 
     {
         enemy.MovementSpeed();
     }
-
 }

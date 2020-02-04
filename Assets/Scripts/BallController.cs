@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-
     [SerializeField] private GameManager manager = null;
 
-    private bool _gameStatus = false;
+    private bool _gameStatus = false;                                   // Checks if the player is playing the game or not.
 
     private Rigidbody2D _rb;
 
@@ -21,24 +20,27 @@ public class BallController : MonoBehaviour
 
     private void Start() 
     {
+        // Set the balls position to the middle of the map.
         transform.position = Vector3.zero;
     }
 
     private void Update() 
     {
+        // Start the game when the player presses the space bar, but check if the game isn't already playing.
         if (Input.GetKeyUp(KeyCode.Space) && _gameStatus == false)
         {
-            int randDirection = Random.Range(1, 4);
-            MoveAngle(randDirection);
-            manager.PlaySound(0);
+            int randDirection = Random.Range(1, 4);                 // Choose between the 4 direction from the MoveAngle function.
+            MoveAngle(randDirection);                                       
+            manager.PlaySound(0);                                            // Play sound based on the array from the GameManager Script.
             _gameStatus = true;
         }
     }
 
+    // Reset the game.
     public void ResetBallPosition()
     {
-        _rb.Sleep();
-        transform.position = Vector3.zero;
+        _rb.Sleep();                                                                      // Reset the RigidBody so the ball doesn't move.
+        transform.position = Vector3.zero;                              // Set the balls position to the middle of the map.
         _gameStatus = false;
     }
 
@@ -47,9 +49,10 @@ public class BallController : MonoBehaviour
         manager.PlaySound(other.gameObject.CompareTag("Finish") ? 1 : 0);
     }
 
-    private void MoveAngle( int value)
+    // Move the ball to the desired location.
+    private void MoveAngle( int value )
     {
-        //TODO: Use Random.Range instead of this. 
+        //TODO: Use Random.Range instead. 
         switch(value)
         {
             case 1:
@@ -69,5 +72,4 @@ public class BallController : MonoBehaviour
                 break;
         }
     }
-
 }

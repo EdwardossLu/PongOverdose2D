@@ -6,7 +6,6 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    
     [SerializeField] private TextMeshProUGUI[] text = new TextMeshProUGUI[3]; /*
         [TEXT]
         0 = Start
@@ -32,10 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (TextMeshProUGUI tmp in text)
-        {
-            tmp.gameObject.SetActive(true);
-        }
+        DisplayText(true);
     }
 
     private void Update() 
@@ -43,6 +39,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
             DisplayText(false);
 
+        // 
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             _paused = !_paused;
@@ -57,9 +54,10 @@ public class GameManager : MonoBehaviour
     public void ResetGame()
     {
         DisplayText(true);
-        ball.ResetBallPosition();
+        ball.ResetBallPosition();                                                   // Called this script to reset the ball.
     }
 
+    // Toggle the visibility of each text.
     private void DisplayText( bool activation )
     {
         foreach (TextMeshProUGUI tmp in text)
@@ -68,15 +66,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Choose which sound to play from the array.
     public void PlaySound( int sound )
     {
         _audioSource.clip = audioClips[sound];
         _audioSource.Play();
     }
 
+    // Pause the game when the esc button is pressed.
     private static void PauseGame( bool pause )
     {
         Time.timeScale = pause ? 0 : 1;
     }
-
 }
