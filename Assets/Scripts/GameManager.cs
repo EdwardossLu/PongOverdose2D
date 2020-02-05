@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private bool _paused = false;
 
 
-    private void Awake() 
+    private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
     }
@@ -34,17 +34,20 @@ public class GameManager : MonoBehaviour
         DisplayText(true);
     }
 
-    private void Update() 
+    private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
             DisplayText(false);
 
         // 
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             _paused = !_paused;
             PauseGame(_paused);
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            Application.Quit();
 
         if (!Input.GetKeyUp(KeyCode.R)) return;
         ResetGame();
@@ -58,7 +61,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Toggle the visibility of each text.
-    private void DisplayText( bool activation )
+    private void DisplayText(bool activation)
     {
         foreach (TextMeshProUGUI tmp in text)
         {
@@ -67,14 +70,14 @@ public class GameManager : MonoBehaviour
     }
 
     // Choose which sound to play from the array.
-    public void PlaySound( int sound )
+    public void PlaySound(int sound)
     {
         _audioSource.clip = audioClips[sound];
         _audioSource.Play();
     }
 
     // Pause the game when the esc button is pressed.
-    private static void PauseGame( bool pause )
+    private static void PauseGame(bool pause)
     {
         Time.timeScale = pause ? 0 : 1;
     }

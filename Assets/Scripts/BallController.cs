@@ -27,7 +27,7 @@ public class BallController : MonoBehaviour
     private void Update() 
     {
         // Start the game when the player presses the space bar, but check if the game isn't already playing.
-        if (Input.GetKeyUp(KeyCode.Space) && _gameStatus == false)
+        if (Input.GetKeyUp(KeyCode.Space) && _gameStatus == false || Input.GetMouseButtonUp(0) && _gameStatus == false)
         {
             int randDirection = Random.Range(1, 4);                 // Choose between the 4 direction from the MoveAngle function.
             MoveAngle(randDirection);                                       
